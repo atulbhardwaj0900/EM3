@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+
+import main.taskem.com.agri.view.EventContentView;
 
 import main.taskem.com.agri.view.EventImageView;
 
@@ -23,13 +26,17 @@ public class ScrollingActivity extends AppCompatActivity {
 		eventImageView.setImage("https://involvio-staging.s3.amazonaws.com/uploads/user/profile_image/57394330d04f908a1f000519/C501DD69-AC37-4F73-9909-BBB6911BCB97-40038-00004F36DED7FF20.png");
 
 		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
-			}
-		});
+		if (fab != null) {
+			fab.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+							.setAction("Action", null).show();
+				}
+			});
+		}
+		LinearLayout mainView = (LinearLayout) findViewById(R.id.main_container_layout);
+		mainView.addView(new EventContentView(this));
 	}
 
 	@Override
