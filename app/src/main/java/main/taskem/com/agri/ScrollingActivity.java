@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import main.taskem.com.agri.view.EventImageView;
+
 public class ScrollingActivity extends AppCompatActivity {
 
 	@Override
@@ -17,6 +19,8 @@ public class ScrollingActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_scrolling);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
+		EventImageView eventImageView = (EventImageView)findViewById(R.id.eventImageView);
+		eventImageView.setImage("https://involvio-staging.s3.amazonaws.com/uploads/user/profile_image/57394330d04f908a1f000519/C501DD69-AC37-4F73-9909-BBB6911BCB97-40038-00004F36DED7FF20.png");
 
 		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 		fab.setOnClickListener(new View.OnClickListener() {
