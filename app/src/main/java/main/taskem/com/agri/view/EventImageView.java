@@ -23,10 +23,6 @@ public class EventImageView extends ImageView{
         super(context, attrs, defStyleAttr);
     }
 
-    public EventImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        this.context = context;
-    }
     public void setImage(String url){
         Picasso.with(context).load(url).into(this);
     }

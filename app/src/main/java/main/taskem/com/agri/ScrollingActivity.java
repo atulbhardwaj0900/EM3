@@ -35,10 +35,13 @@ public class ScrollingActivity extends AppCompatActivity {
 				}
 			});
 		}
-		LinearLayout mainView = (LinearLayout) findViewById(R.id.main_container_layout);
-		mainView.addView(new EventContentView(this));
+
+		setEventDetailView();
 	}
 
+	private void setEventDetailView(){
+
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
