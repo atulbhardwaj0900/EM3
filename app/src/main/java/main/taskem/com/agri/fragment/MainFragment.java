@@ -19,6 +19,9 @@ import java.io.InputStream;
 import main.taskem.com.agri.R;
 import main.taskem.com.agri.adapter.JsonArrayAdapter.OnRecyclerItemClick;
 import main.taskem.com.agri.adapter.MainHorizontalAdapter;
+import main.taskem.com.agri.controller.Controller;
+import main.taskem.com.agri.models.HeadContent;
+import main.taskem.com.agri.view.EventHeaderView;
 import main.taskem.com.agri.view.EventImageView;
 
 /**
@@ -28,6 +31,7 @@ import main.taskem.com.agri.view.EventImageView;
 public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JSONObject> {
 	private MainHorizontalAdapter mNoteListAdapter;
 	private LinearLayout mFragmentView;
+	Controller controller ;
 
 	public MainFragment() {
 	}
@@ -43,8 +47,11 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JS
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
-		parseJson(loadJSONFromAsset());
+		controller  = new Controller(getContext());
+		controller.loadContent();
+		HeadContent headContent = controller.getHead();
+		setBackgroundImg();
+		addHeadView(headContent);
 	}
 
 	private void parseJson(String jsonString) {
@@ -80,7 +87,13 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JS
 		mFragmentView.addView(
 				LayoutInflater.from(mBaseActivity).inflate(R.layout.event_details_view, null));
 	}
-
+	private void addHeadView(HeadContent headContent){
+		EventHeaderView eventHeaderView = (EventHeaderView)mFragmentView.findViewById(R.id.headerView);
+		eventHeaderView.setHeading(headContent.getHeading());
+		eventHeaderView.setStartDate(headContent.getStartDate());
+		eventHeaderView.setEndDate(headContent.getEndDate());
+		eventHeaderView.setAttendingStatus(headContent.getAttending_status());
+	}
 
 	@Override
 	public void onClick(View v) {
