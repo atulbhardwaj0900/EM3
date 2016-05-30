@@ -2,17 +2,15 @@ package main.taskem.com.agri.view;
 
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Picasso.Listener;
 
 /**
  * Created by atul.bhardwaj on 30/05/16.
  */
-public class EventImageView extends ImageView implements Listener {
+public class EventImageView extends ImageView {
 	private Context context;
 
 	public EventImageView(Context context) {
@@ -35,8 +33,4 @@ public class EventImageView extends ImageView implements Listener {
 		Picasso.with(context).load(url).into(this);
 	}
 
-	@Override
-	public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
-
-	}
 }
