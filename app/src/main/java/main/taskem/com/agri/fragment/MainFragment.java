@@ -2,13 +2,13 @@ package main.taskem.com.agri.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +29,8 @@ import main.taskem.com.agri.view.EventImageView;
  * A placeholder fragment containing a simple view.
  */
 public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JSONObject> {
+	public static final String TAG_DETAIL_VIEW = "tag_detail_view";
+	private final static String TAG_HEADER_VIEW = "tag_header_view";
 	private MainHorizontalAdapter mNoteListAdapter;
 	private LinearLayout mFragmentView;
 	Controller controller ;
@@ -61,7 +63,10 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JS
 				if (jsonObject.has("name")) {
 					setToolBar(jsonObject.optString("name"));
 				}
-				addHeaderView();
+				JSONObject list = jsonObject.optJSONObject("list");
+				if(list != null) {
+					addEventDetailsView(list);
+				}
 				setBackgroundImg();
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -70,7 +75,17 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JS
 		}
 
 	}
-
+	private void addEventDetailsView(JSONObject list) {
+			View view = LayoutInflater.from(mBaseActivity).inflate(R.layout.event_details_view, null);
+			mFragmentView.addView(view);
+		String name = list.optString("name");
+		String id = list.optString("_id");
+		String picUrl = list.optString("picture_url");
+		TextView address = (TextView) view.findViewById(R.id.address_txt);
+		address.setText(name);
+		EventImageView eventImageView = (EventImageView) view.findViewById(R.id.address_img_view);
+		eventImageView.setImage(picUrl);
+	}
 	private void setToolBar(String title) {
 		Toolbar toolbar = (Toolbar) mBaseActivity.findViewById(R.id.toolbar);
 		toolbar.setTitle(title);
@@ -82,6 +97,7 @@ public class MainFragment extends BaseFragment implements OnRecyclerItemClick<JS
 		eventImageView.setImage(
 				"https://involvio-staging.s3.amazonaws.com/uploads/user/profile_image/57394330d04f908a1f000519/C501DD69-AC37-4F73-9909-BBB6911BCB97-40038-00004F36DED7FF20.png");
 	}
+
 
 	private void addHeaderView() {
 		mFragmentView.addView(

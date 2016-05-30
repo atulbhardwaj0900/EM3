@@ -29,6 +29,8 @@ public class EventImageView extends ImageView {
 	}
 
 	public void setImage(String url) {
+
 		Picasso.with(context).load(url).into(this);
 	}
+
 }
