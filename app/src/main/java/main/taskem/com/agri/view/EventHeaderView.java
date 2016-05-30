@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
 /**
- * Created by atul.bhardwaj on 28/05/16.
+ * Created by atul.bhardwaj on 30/05/16.
  */
 public class EventHeaderView  extends RelativeLayout {
 
@@ -21,7 +21,4 @@ public class EventHeaderView  extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public EventHeaderView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
 }
