@@ -1,19 +1,25 @@
 package main.taskem.com.agri.view;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import main.taskem.com.agri.R;
 import main.taskem.com.agri.adapter.JsonArrayAdapter.OnRecyclerItemClick;
+import main.taskem.com.agri.models.BodyContent;
 
 
 /**
  * Created by atul.bhardwaj on 30/05/16.
  */
-public class EventDetailsView extends CardView implements OnRecyclerItemClick<JSONObject> {
+public class EventDetailsView extends LinearLayout implements OnRecyclerItemClick<JSONObject> {
 	private Context mContext;
+	private View mView;
 
 	public EventDetailsView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -27,20 +33,20 @@ public class EventDetailsView extends CardView implements OnRecyclerItemClick<JS
 		init();
 	}
 
-	public void updateView(JSONObject jsonObject) {
-		if (jsonObject == null) {
-			this.setVisibility(GONE);
-		}
+	private void init() {
+		mView = LayoutInflater.from(mContext).inflate(R.layout.event_details_view, this, true);
 
 	}
 
-	private void init() {
-//		RecyclerView recycleView = (RecyclerView) findViewById(R.id.recycleView);
-//		LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-//		layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//		recycleView.setLayoutManager(layoutManager);
-		//MainHorizontalAdapter mNoteListAdapter = new MainHorizontalAdapter(this);
-		//recycleView.setAdapter(mNoteListAdapter);
+	public void setData(BodyContent bodyContent) {
+		TextView address = (TextView) mView.findViewById(R.id.address_txt);
+		address.setText(bodyContent.getName());
+		EventImageView eventImageView = (EventImageView) mView.findViewById(R.id.address_img_view);
+		eventImageView.setImage(bodyContent.getUrl());
+	}
+
+	protected void onFinishInflate() {
+		super.onFinishInflate();
 	}
 
 	@Override
